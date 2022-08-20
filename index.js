@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
-
-const port = 5000;
+const config = require('./config/config.json');
 
 const ledrouter = require('./routes/index.js');
 
@@ -18,6 +17,6 @@ app.use(function (req, res, next) {
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 app.use(ledrouter);
 
-app.listen((port), () => {
-    console.log(`ELK-BLEDOM API v3 running on port ${port}`)
+app.listen((config.port), () => {
+    console.log(`ELK-BLEDOM API v3 running on port ${config.port}`)
 });
