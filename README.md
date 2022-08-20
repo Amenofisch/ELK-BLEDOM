@@ -14,8 +14,7 @@ or alternatively you can specify a custom hex code with the following request bo
 
 ## Changing brightness of LEDs
 Send post request to "http://yourip:5000/brightness" with the following request body:
-
-       { "value": 100 }
+`{ "value": 100 }`
 
 You can choose any number between 0 and 100.
 
