@@ -16,11 +16,11 @@ function d2h(d) {
 */
 async function handleResp(resp) {
     if(resp.toLowerCase().trim() !== "characteristic value was written successfully") {
-        console.error("[" + new Date().toGMTString() +  " ERROR] " + resp);
+        console.error("[" + new Date().toGMTString() +  "] " + resp);
         return false;
     }
     if(resp.toLowerCase().trim() === "connect to be:ff:20:00:06:ff: function not implemented (38)") {
-        console.error("[" + new Date().toGMTString() +  " ERROR] " + resp);
+        console.error("[" + new Date().toGMTString() +  "] " + resp);
         return false; 
     }
     return true;

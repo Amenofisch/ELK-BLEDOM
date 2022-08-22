@@ -3,6 +3,11 @@ const router = express.Router();
 const ledstrip = require("../modules/ledstrip.js");
 const colors = require("../config/colors.json");
 
+/**
+ * 
+ * @param {String} name Takes a color name from colors.json (default is german)
+ * @returns {String} Returns a HEX value of that color without the # in the beginning 
+ */
 function returnHex(name) {
     let obj = colors.find((x) => x.colorname === name);
     let color = obj.colorhex.replace('#', '');
@@ -25,24 +30,16 @@ router.get("/", (req, res) => {
 router.post("/color", (req, res) => {
     let color = req.body.color;
     let mode = req.body.mode;
-    if (!color) {
-        res.send("Invalid request!").status(400);
-        return;
-    }
-    if (!mode)
-        mode = "default";
+    if (!color) { res.send("Invalid request!").status(400); return; }
+    if (!mode) mode = "default";
 
     try {
         ledstrip.setPower(true);
-        let newColor = returnHex(color);
+        let hexColor = returnHex(color);
 
-        if (mode == "default") {
-            ledstrip.setColor(newColor);
-        }
+        if (mode == "default") ledstrip.setColor(hexColor); 
+        if (mode == "custom") ledstrip.setColor(color); 
 
-        if (mode == "custom") {
-            ledstrip.setColor(color);
-        }
         res.status(200).send("Success!");
     } catch (err) {
         console.log(err);
@@ -51,18 +48,13 @@ router.post("/color", (req, res) => {
 });
 
 router.post("/power", (req, res) => {
-    if (req.body == null) {
-        res.send("Invalid request! " + req.body).status(400);
-        return;
-    }
+    if (req.body == null) { res.send("Invalid request! " + req.body).status(400); return; }
 
     try {
         let value = req.body.value;
-        if (value)
-            ledstrip.setPower(true);
+        if (value) ledstrip.setPower(true);
+        if (!value) ledstrip.setPower(false);
 
-        if (!value)
-            ledstrip.setPower(false);
         res.status(200).send("Success!");
     } catch (err) {
         console.log(err);
@@ -71,10 +63,7 @@ router.post("/power", (req, res) => {
 });
 
 router.post("/brightness", (req, res) => {
-    if (req.body == null) {
-        res.send("Invalid request").status(400);
-        return;
-    }
+    if (req.body == null) { res.send("Invalid request").status(400); return; }
 
     try {
         let value = req.body.value;
