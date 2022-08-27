@@ -1,0 +1,22 @@
+{
+  "name": "elk-bledom",
+  "version": "1.0.0",
+  "description": "Control your chinese LED Controller with simple POST requests and Bluetooth Low-Energy (BLE)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amenofisch/ELK-BLEDOM.git"
+  },
+  "author": "Amenofisch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Amenofisch/ELK-BLEDOM/issues"
+  },
+  "homepage": "https://github.com/Amenofisch/ELK-BLEDOM#readme",
+  "devDependencies": {
+    "eslint": "^8.23.0"
+  }
+}
