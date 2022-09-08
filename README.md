@@ -25,15 +25,15 @@ You can choose any number between 0 and 100.
 ## Configuration
 You can set the Bluetooth Address in "config/config.json" under "bid".
 You can also set which handle it should write to in "config"/config.sjon" under "handle"
-You can also specify and alternative device that it should use to communicate with, in "config/config.json" under "device"
+You can also specify an alternative device that it should use to communicate with, in "config/config.json" under "device"
 
 ## Requirements
 
  - Raspberry Pi with Bluetooth capability (with any linux os installed)
  - gatttool `sudo apt-get install bluetooth bluez libbluetooth-dev libudev-dev` (not tested)
  - some coding knowledge
-- shelljs `npm install shelljs -y`
-- expressjs `npm install express -y`
+- shelljs
+- expressjs 
 - nodejs   ( [w3schools tutorial for installation](https://www.w3schools.com/nodejs/nodejs_raspberrypi.asp) )
 - ( recommended ) pm2 `npm install -g pm2`
 
