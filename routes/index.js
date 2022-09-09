@@ -34,10 +34,13 @@ router.post("/color", (req, res) => {
     if (!mode) mode = "default";
 
     try {
-        ledstrip.setPower(true);
-        let hexColor = returnHex(color);
+        ledstrip.setPower(true);    // Ensures that the Ledstrip is turned on before trying to change color
 
-        if (mode == "default") ledstrip.setColor(hexColor); 
+        if (mode == "default") {
+            let hexColor = returnHex(color);
+            ledstrip.setColor(hexColor);
+        }
+
         if (mode == "custom") ledstrip.setColor(color); 
 
         res.status(200).send("Success!");

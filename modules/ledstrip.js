@@ -9,10 +9,12 @@ function d2h(d) {
     return s;
 }
 
+// TODO: Replace gatttool with something more up to date.
+
 /** 
 *
 * @param {string} resp Takes a string from a shell.exec and checks if it executed succesfully.
-*
+* Not the best solution but works well enough.
 */
 async function handleResp(resp) {
     if(resp.toLowerCase().trim() !== "characteristic value was written successfully") {
