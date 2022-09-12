@@ -10,6 +10,7 @@ function d2h(d) {
 }
 
 // TODO: Replace gatttool with something more up to date.
+// TODO: fix timezone
 
 /** 
 *
@@ -18,11 +19,11 @@ function d2h(d) {
 */
 async function handleResp(resp) {
     if(resp.toLowerCase().trim() !== "characteristic value was written successfully") {
-        console.error("[" + new Date().addHours(2).toGMTString() +  "] " + resp);
+        console.error("[" + new Date().toGMTString() +  "] " + resp);
         return false;
     }
     if(resp.toLowerCase().trim() === "connect to be:ff:20:00:06:ff: function not implemented (38)") {
-        console.error("[" + new Date().addHours(2).toGMTString() +  "] " + resp);
+        console.error("[" + new Date().toGMTString() +  "] " + resp);
         return false; 
     }
     return true;
@@ -35,7 +36,7 @@ async function handleResp(resp) {
 async function setColor(hex) {
     let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e070503${hex}10ef`);
     if(!handleResp(resp)) setColor(hex);
-    console.log("[" + new Date().addHours(2).toGMTString() + "]" + " Color set to " + hex);
+    console.log("[" + new Date().toGMTString() + "]" + " Color set to " + hex);
 }
 
 /**
@@ -53,7 +54,7 @@ async function setPower(value) {
         console.error("Wrong request while trying to setPower. Value: " + value.toString());
         return;
     }
-    console.log("[" + new Date().addHours(2).toGMTString() + "]" + " Ledstrip power status changed to " + value.toString());
+    console.log("[" + new Date().toGMTString() + "]" + " Ledstrip power status changed to " + value.toString());
 }
 
 /**
@@ -66,7 +67,7 @@ async function setBrightness(value) {
     let hex = d2h(value);
     let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0401${hex}01ffff00ef`);
     if(!handleResp(resp)) setBrightness(value);
-    console.log("[" + new Date().addHours(2).toGMTString() + "]" + " Brightness set to " + value + " HEX: " + hex);
+    console.log("[" + new Date().toGMTString() + "]" + " Brightness set to " + value + " HEX: " + hex);
 }
 
 module.exports = { setColor, setPower, setBrightness };
