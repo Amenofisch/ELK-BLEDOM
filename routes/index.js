@@ -28,8 +28,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/color", (req, res) => {
-    let color = req.body.color;
-    let mode = req.body.mode;
+    let [ color, mode ] = req.body;
     if (!color) { res.send("Invalid request!").status(400); return; }
     if (!mode) mode = "default";
 
@@ -54,7 +53,7 @@ router.post("/power", (req, res) => {
     if (req.body == null) { res.send("Invalid request! " + req.body).status(400); return; }
 
     try {
-        let value = req.body.value;
+        let [ value ] = req.body;
         if (value) ledstrip.setPower(true);
         if (!value) ledstrip.setPower(false);
 
@@ -69,7 +68,7 @@ router.post("/brightness", (req, res) => {
     if (req.body == null) { res.send("Invalid request").status(400); return; }
 
     try {
-        let value = req.body.value;
+        let [ value ] = req.body;
         ledstrip.setBrightness(value);
         res.status(200).send("Success!");
     } catch (err) {
