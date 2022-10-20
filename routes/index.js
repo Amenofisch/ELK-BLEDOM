@@ -34,11 +34,9 @@ router.get("/", (req, res) => {
 router.post("/color", (req, res) => {
     let color = req.body.color;
     let mode = req.body.mode;
-    let lang = req.body.lang;
 
     if (!color) { res.send("Invalid request!").status(400); return; }
     if (!mode) mode = "default";
-    if(!lang) lang = 'de';
 
     try {
         ledstrip.setPower(true);    // Ensures that the Ledstrip is turned on before trying to change color
