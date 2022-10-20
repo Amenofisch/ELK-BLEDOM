@@ -14,7 +14,9 @@ app.use(function (req, res, next) {
     next();
 });
 
+// Don't return favicon since we don't have/need one
 app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 app.use(ledrouter);
 
 app.listen((config.port), () => {
