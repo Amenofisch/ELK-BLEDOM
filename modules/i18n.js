@@ -6,6 +6,7 @@ const i18n = new I18n({
     staticCatalog: {
         de: require('../locale/de.json'),
         en: require('../locale/en.json'),
+        hu: require('../locale/hu.json'),
     },
     defaultLocale: 'de'
 });
