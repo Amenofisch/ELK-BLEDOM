@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const config = require('./config/config.json');
 
+const config = require('./config/config.json');
 const ledrouter = require('./routes/index.js');
 
 app.use(express.json());
