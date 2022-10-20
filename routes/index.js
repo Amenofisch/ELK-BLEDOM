@@ -13,9 +13,7 @@ const { i18n } = require('../modules/i18n.js');
 
 
 function returnHex(name) {
-    let obj = colors.find((x) => x.colorname === i18n.__(name));
-    let color = obj.colorhex.replace('#', '');
-    return color;
+    return colors.find((x) => x.colorname === i18n.__(name)).color.replace('#','');
 }
 
 router.use(express.json());
