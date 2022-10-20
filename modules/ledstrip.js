@@ -18,15 +18,16 @@ function d2h(d) {
 * Not the best solution but works well enough.
 */
 async function handleResp(resp) {
-    if(resp.toLowerCase().trim() !== "characteristic value was written successfully") {
-        console.error("[" + new Date().toGMTString() +  "] " + resp);
-        return false;
+    switch(resp) {
+        case "characteristic value was written successfully":
+            console.error("[" + new Date().toGMTString() +  "] " + resp);
+            return true;
+        case "connect to be:ff:20:00:06:ff: function not implemented (38)":
+            console.error("[" + new Date().toGMTString() +  "] " + resp);
+            return false; 
+        default:
+            return false;
     }
-    if(resp.toLowerCase().trim() === "connect to be:ff:20:00:06:ff: function not implemented (38)") {
-        console.error("[" + new Date().toGMTString() +  "] " + resp);
-        return false; 
-    }
-    return true;
 }
 
 /**
@@ -44,15 +45,18 @@ async function setColor(hex) {
  * @param {boolean} value Takes a boolean and toggles the led strip on/off
  */
 async function setPower(value) {
-    if(value) {
-        let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0404f00001ff00ef`);
-        if(!handleResp(resp)) setPower(value);
-    } else if (!value) {
-        let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0404000000ff00ef`)
-        if(!handleResp(resp)) setPower(value);
-    } else {
-        console.error("Wrong request while trying to setPower. Value: " + value.toString());
-        return;
+    let resp;
+
+    switch(value) {
+        case true:
+            resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0404f00001ff00ef`);
+            if(!handleResp(resp)) setPower(value);
+        case false:
+            resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0404000000ff00ef`)
+            if(!handleResp(resp)) setPower(value);
+        default:
+            console.error("Wrong request while trying to setPower! Value:" + value.toString());
+            break;
     }
     console.log("[" + new Date().toGMTString() + "]" + " Ledstrip power status changed to " + value.toString());
 }

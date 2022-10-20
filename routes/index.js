@@ -37,12 +37,13 @@ router.post("/color", (req, res) => {
     try {
         ledstrip.setPower(true);    // Ensures that the Ledstrip is turned on before trying to change color
 
-        if (mode == "default") {
-            let hexColor = returnHex(color);
-            ledstrip.setColor(hexColor);
+        switch(mode) {
+            case 'default':
+                let hexColor = returnHex(color);
+                ledstrip.setColor(hexColor)
+            case 'custom':
+                ledstrip.setColor(color);
         }
-
-        if (mode == "custom") ledstrip.setColor(color); 
 
         res.status(200).send("Success!");
     } catch (err) {
@@ -56,8 +57,8 @@ router.post("/power", (req, res) => {
 
     try {
         let value = req.body.value;
-        if (value) ledstrip.setPower(true);
-        if (!value) ledstrip.setPower(false);
+
+        value ? ledstrip.setPower(true) : ledstrip.setPower(false);
 
         res.status(200).send("Success!");
     } catch (err) {
