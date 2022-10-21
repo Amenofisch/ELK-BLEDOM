@@ -9,9 +9,7 @@ const colors = require("../config/colors.json");
  * @returns {String} Returns a HEX value of that color without the # in the beginning 
  */
 function returnHex(name) {
-    let obj = colors.find((x) => x.colorname === name);
-    let color = obj.colorhex.replace('#', '');
-    return color;
+    return colors.find((x) => x.colorname === name).colorhex.replace('#','');
 }
 
 router.use(express.json());
