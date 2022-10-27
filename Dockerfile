@@ -13,7 +13,7 @@ WORKDIR /app
 COPY ["package.json", "package-lock.json*", "./"]
 
 # Install gatttool
-RUN sudo apt-get install bluetooth bluez libbluetooth-dev libudev-dev
+RUN apt-get install bluetooth bluez libbluetooth-dev libudev-dev
 
 RUN npm install
 # If you are building your code for production
