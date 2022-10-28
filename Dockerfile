@@ -12,6 +12,8 @@ WORKDIR /app
 # where available (npm@5+)
 COPY ["package.json", "package-lock.json*", "./"]
 
+# TODO: Install gatttool and bluez-tools
+
 RUN npm install
 # If you are building your code for production
 # RUN npm ci --only=production
