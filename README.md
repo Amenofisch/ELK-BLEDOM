@@ -1,4 +1,4 @@
-# ELK-BLEDOM
+# ELK-BLEDOM [![Deploy to RPI](https://github.com/Amenofisch/ELK-BLEDOM/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/Amenofisch/ELK-BLEDOM/actions/workflows/main.yml)
 Control your chinese LED Controller with simple POST requests and Bluetooth Low-Energy (BLE)
 
 ## Turning on LEDs
