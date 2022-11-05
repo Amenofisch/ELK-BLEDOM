@@ -13,7 +13,7 @@ function d2h(d) {
 // TODO: fix timezone
 
 /** 
-*
+* @deprecated Do not use this function anymore, its broken!
 * @param {string} resp Takes a string from a shell.exec and checks if it executed succesfully.
 * Not the best solution but works well enough.
 */
@@ -36,8 +36,7 @@ async function handleResp(resp) {
  */
 async function setColor(hex) {
     let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e070503${hex}10ef`);
-    if(!handleResp(resp)) setColor(hex);
-    console.log('[' + new Date().toGMTString() + ']' + ' Color set to ' + hex);
+    console.log("[" + new Date().toGMTString() + "]" + " Color set to " + hex);
 }
 
 /**
@@ -45,18 +44,14 @@ async function setColor(hex) {
  * @param {boolean} value Takes a boolean and toggles the led strip on/off
  */
 async function setPower(value) {
-    let resp;
 
-    switch(value) {
-        case true:
-            resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0404f00001ff00ef`);
-            if(!handleResp(resp)) setPower(value);
-        case false:
-            resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0404000000ff00ef`)
-            if(!handleResp(resp)) setPower(value);
-        default:
-            console.error('Wrong request while trying to setPower! Value:' + value.toString());
-            break;
+    if(value) {
+        let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0404f00001ff00ef`);
+    } else if (!value) {
+        let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0404000000ff00ef`)
+    } else {
+        console.error("Wrong request while trying to setPower. Value: " + value.toString());
+        return;
     }
     console.log('[' + new Date().toGMTString() + ']' + ' Ledstrip power status changed to ' + value.toString());
 }
@@ -70,8 +65,7 @@ async function setBrightness(value) {
 
     let hex = d2h(value);
     let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0401${hex}01ffff00ef`);
-    if(!handleResp(resp)) setBrightness(value);
-    console.log('[' + new Date().toGMTString() + ']' + ' Brightness set to ' + value + ' HEX: ' + hex);
+    console.log("[" + new Date().toGMTString() + "]" + " Brightness set to " + value + " HEX: " + hex);
 }
 
 module.exports = { setColor, setPower, setBrightness };
