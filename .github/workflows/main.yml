@@ -21,7 +21,7 @@ jobs:
       - name: Restart PM2 instance
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: pm2 restart index.js
+          command: sudo su pi && pm2 restart index
           host: ${{ secrets.HOST }}
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
