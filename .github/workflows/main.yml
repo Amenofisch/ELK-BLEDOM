@@ -11,7 +11,7 @@ jobs:
       - name: Pull repo to RPI
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: cd /home/pi/ELK-BLEDOM/ && git pull
+          command: cd /home/pi/ELK-BLEDOM/ && git pull main
           host: ${{ secrets.HOST }}
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
@@ -21,11 +21,12 @@ jobs:
       - name: Restart PM2 instance
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: pm2 restart index
+          command: pm2 restart index.js
           host: ${{ secrets.HOST }}
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           privateKey: ${{ secrets.PRIVATE_KEY }}
+          password: ${{ secrets.PASSWORD }}
         
   
     
