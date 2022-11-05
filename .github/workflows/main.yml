@@ -1,9 +1,7 @@
 name: "Deploy to RPI"
 run-name: ${{ github.actor }} is deploying to RPI!
-on: 
-  push:
-    branches:
-      - main
+on: [workflow_dispatch]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
