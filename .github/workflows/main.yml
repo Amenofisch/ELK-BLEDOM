@@ -1,0 +1,30 @@
+name: "Deploy to RPI"
+run-name: ${{ github.actor }} is deploying to RPI!
+on: 
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull repo to RPI
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: cd /home/pi/ELK-BLEDOM/ && git pull
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          privateKey: ${{ secrets.PRIVATE_KEY }}
+          
+      - name: Restart PM2 instance
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: pm2 restart index
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          privateKey: ${{ secrets.PRIVATE_KEY }}
+        
+  
+    
