@@ -16,6 +16,7 @@ jobs:
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           privateKey: ${{ secrets.PRIVATE_KEY }}
+          password: ${{ secrets.PASSWORD }}
           
       - name: Restart PM2 instance
         uses: garygrossgarten/github-action-ssh@release
