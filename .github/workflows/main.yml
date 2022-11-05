@@ -11,7 +11,7 @@ jobs:
       - name: Pull repo to RPI
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: cd /home/pi/ELK-BLEDOM/ && git pull main
+          command: cd /home/pi/ELK-BLEDOM/ && git pull ELK-BLEDOM/main main
           host: ${{ secrets.HOST }}
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
