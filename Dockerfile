@@ -15,6 +15,8 @@ COPY ["package.json", "package-lock.json*", "./"]
 # TODO: Install gatttool and bluez-tools
 
 RUN npm install
+
+RUN apt-get install bluetooth bluez libbluetooth-dev libudev-dev
 # If you are building your code for production
 # RUN npm ci --only=production
 
