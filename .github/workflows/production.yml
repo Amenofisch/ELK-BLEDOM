@@ -1,5 +1,5 @@
-name: "Deploy to RPI"
-run-name: ${{ github.actor }} is deploying to RPI!
+name: "Deploy Production to PI"
+run-name: ${{ github.actor }} is deploying Production to PI!
 on: [workflow_dispatch]
 
 jobs:
@@ -9,7 +9,7 @@ jobs:
       - name: Pull repo to RPI
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: cd /home/pi/ELK-BLEDOM/ && git checkout main -f && git pull 
+          command: cd /home/pi/ELK-BLEDOM/ && git checkout production -f && git pull 
           host: ${{ secrets.HOST }}
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
