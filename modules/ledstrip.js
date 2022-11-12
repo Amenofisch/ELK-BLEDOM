@@ -37,6 +37,7 @@ async function handleResp(resp) {
 async function setColor(hex) {
     let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e070503${hex}10ef`);
     console.log("[" + new Date().toGMTString() + "]" + " Color set to " + hex);
+    return true;
 }
 
 /**
@@ -51,9 +52,10 @@ async function setPower(value) {
         let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0404000000ff00ef`)
     } else {
         console.error("Wrong request while trying to setPower. Value: " + value.toString());
-        return;
+        return false;
     }
-    console.log('[' + new Date().toGMTString() + ']' + ' Ledstrip power status changed to ' + value.toString());
+    console.log("[" + new Date().toGMTString() + "]" + " Ledstrip power status changed to " + value.toString());
+    return true;
 }
 
 /**
@@ -61,11 +63,12 @@ async function setPower(value) {
  * @param {integer} value Takes an integer between 0 and 100 to set the brightness of the led strip
  */
 async function setBrightness(value) {
-    if(value < 0 || value > 100) { console.error('Error setting brightness, value must be between 0 and 100'); return;}
+    if(value < 0 || value > 100) { console.error("Error setting brightness, value must be between 0 and 100"); return false;}
 
     let hex = d2h(value);
     let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0401${hex}01ffff00ef`);
     console.log("[" + new Date().toGMTString() + "]" + " Brightness set to " + value + " HEX: " + hex);
+    return true;
 }
 
-module.exports = { setColor, setPower, setBrightness };
+module.exports = { setColor, setPower, setBrightness, d2h };
