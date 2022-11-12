@@ -4,7 +4,7 @@
   "description": "Control your chinese LED Controller with simple POST requests and Bluetooth Low-Energy (BLE)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/Amenofisch/ELK-BLEDOM#readme",
   "devDependencies": {
-    "eslint": "^8.23.0"
+    "eslint": "^8.23.0",
+    "jest": "^29.3.1"
   },
   "dependencies": {
     "express": "^4.18.2",
