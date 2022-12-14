@@ -1,8 +1,8 @@
 import Song from './song'
 
 export default class Spotify {
-    constructor(manager) {
-        manager = manager
+    constructor(ledstrip) {
+        this.manager = ledstrip
         this.refreshToken = null
         this.accessToken = {
             token: null,
