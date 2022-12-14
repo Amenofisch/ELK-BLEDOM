@@ -2,14 +2,14 @@ import Song from './song'
 
 export default class Spotify {
     constructor(manager) {
-        this.manager = manager
-        this.refreshToken = null
-        this.accessToken = {
+        manager = manager
+        refreshToken = null
+        accessToken = {
             token: null,
             expireDate: null
         }
-        this.isReady = false;
-        this.pollingTime = 1000
+        isReady = false;
+        pollingTime = 1000
     }
 
     startPolling() {
