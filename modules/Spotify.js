@@ -3,13 +3,13 @@ import Song from './song'
 export default class Spotify {
     constructor(manager) {
         manager = manager
-        refreshToken = null
-        accessToken = {
+        this.refreshToken = null
+        this.accessToken = {
             token: null,
             expireDate: null
         }
-        isReady = false;
-        pollingTime = 1000
+        this.isReady = false;
+        this.pollingTime = 1000
     }
 
     startPolling() {
@@ -20,7 +20,7 @@ export default class Spotify {
     }
     
     stopPolling() {
-        clearInterval(this.pollingInterval)
+        this.clearInterval(this.pollingInterval)
         this.songPause()
     }
 
@@ -42,13 +42,13 @@ export default class Spotify {
 
     songPause() {
         if(this.manager.song.timingInterval != undefined) clearInterval(this.manager.song.timingInterval)
-        if(!this.manager.isPaused) this.manager.hue.turnOff()
+        if(!this.manager.isPaused) this.manager.duoc.turnOff()
         this.manager.song.isPlaying = false
     }
 
     songStart() {
         this.manager.song.startInterval()
-        if(!this.manager.isPaused) this.manager.hue.turnOn()
+        if(!this.manager.isPaused) this.manager.duoc.turnOn()
         this.manager.song.isPlaying = true
     }
 
