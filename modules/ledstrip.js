@@ -69,6 +69,25 @@ async function setBrightness(value) {
     return true;
 }
 
+    constructor() {
+        super()
+        this.song = new Song()
+        this.duoc = new Duoc(this)
+        this.spotify = new Spotify(this)
+        this.isPaused = true
+        this.brightness = 100
+    }
+
+    start() {
+        this.isPaused = false
+        setPower = true
+    }
+
+    stop() {
+        this.isPaused = true
+        setPower = false
+    }
+
     setSpotifyRefreshToken(token) {
         if(token == null) {
             this.spotify.stopPolling()
