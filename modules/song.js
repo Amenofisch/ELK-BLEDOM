@@ -61,7 +61,7 @@ export default class Song {
         }, 10)
     }
     newBar() {
-        // this.manager.hue.setLampState({
+        // this.manager.duoc.setLampState({
         //     hue: this.barHue,
         //     bri: 254,
         //     sat: 254,
@@ -71,12 +71,12 @@ export default class Song {
         this.beatNumber = 0
     }
     newBeat() {
-        let brightness = Math.round((setBrightness-(setBrightness/4*this.beatNumber)))
+        let brightness = Math.round((this.manager.setBrightness-(this.manager.setBrightness/4*this.beatNumber)))
         //console.log('new beat ' + this.name + ' - ' + brightness)
         this.beatNumber++
         if(!this.manager.isPaused) {
-            this.manager.hue.setLampState({
-                hue: this.barHue,
+            this.manager.duoc.setLampState({
+                duoc: this.barHue,
                 bri: brightness,
                 sat: 254,
                 transitiontime: 0
