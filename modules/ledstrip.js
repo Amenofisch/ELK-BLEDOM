@@ -1,6 +1,9 @@
 const config = require('../config/config.json');
 var shell = require('shelljs');
 
+import Spotify from './spotify';
+import Song from './song';
+
 function d2h(d) {
     var s = (+d).toString(16);
     if(s.length < 2) {
