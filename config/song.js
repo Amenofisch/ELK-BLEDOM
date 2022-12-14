@@ -67,11 +67,11 @@ export default class Song {
         //     sat: 254,
         //     transitiontime: 0
         // })
-        this.barHue = Math.floor(Math.random()*65535-25500)+25500
+        setColor = Math.floor(Math.random()*65535-25500)+25500
         this.beatNumber = 0
     }
     newBeat() {
-        let brightness = Math.round((this.manager.brightness-(this.manager.brightness/4*this.beatNumber)))
+        let brightness = Math.round((setBrightness-(setBrightness/4*this.beatNumber)))
         //console.log('new beat ' + this.name + ' - ' + brightness)
         this.beatNumber++
         if(!this.manager.isPaused) {
