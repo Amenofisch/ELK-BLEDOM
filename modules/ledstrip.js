@@ -69,4 +69,24 @@ async function setBrightness(value) {
     return true;
 }
 
-module.exports = { setColor, setPower, setBrightness, d2h };
+    setSpotifyRefreshToken(token) {
+        if(token == null) {
+            this.spotify.stopPolling()
+            this.spotify.refreshToken = null
+            this.spotify.accessToken = {
+                token: null,
+                expiry: null
+            }
+            this.spotify.isReady = false;
+            this.stop()
+            this.emit('update')
+        } else {
+            this.spotify.refreshToken = token
+            this.spotify.getAccessToken()
+            this.spotify.isReady = true;
+            this.spotify.startPolling()
+            this.emit('update')
+        }
+    }
+
+module.exports = { setColor, setPower, setBrightness, d2h, setSpotifyRefreshToken };
