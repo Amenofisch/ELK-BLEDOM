@@ -1,4 +1,4 @@
-# ELK-BLEDOM [![Deploy Production to PI](https://github.com/Amenofisch/ELK-BLEDOM/actions/workflows/production.yml/badge.svg)](https://github.com/Amenofisch/ELK-BLEDOM/actions/workflows/production.yml) [![Node.js CI](https://github.com/Amenofisch/ELK-BLEDOM/actions/workflows/node.js.yml/badge.svg)](https://github.com/Amenofisch/ELK-BLEDOM/actions/workflows/node.js.yml)
+# ELK-BLEDOM [![Node.js CI](https://github.com/Amenofisch/ELK-BLEDOM/actions/workflows/node.js.yml/badge.svg)](https://github.com/Amenofisch/ELK-BLEDOM/actions/workflows/node.js.yml)
 
 Control your chinese LED Controller with simple POST requests and Bluetooth Low-Energy (BLE)
 
