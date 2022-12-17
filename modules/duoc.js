@@ -1,3 +1,5 @@
+export default class Duoc {
+ 
 const config = require('../config/config.json');
 var shell = require('shelljs');
 
