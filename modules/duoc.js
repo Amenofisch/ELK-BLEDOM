@@ -114,3 +114,5 @@ async function setBrightness(value) {
     }
 
 module.exports = { setColor, setPower, setBrightness, d2h, setSpotifyRefreshToken };
+
+}
