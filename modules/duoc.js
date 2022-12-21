@@ -3,8 +3,8 @@ export default class Duoc {
 const config = require('../config/config.json');
 var shell = require('shelljs');
 
-import Spotify from './spotify';
-import Song from './song';
+const Spotify = require('./Spotify');
+const Song = require('./song');
 
 function d2h(d) {
     var s = (+d).toString(16);
