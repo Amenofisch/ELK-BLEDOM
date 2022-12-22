@@ -1,4 +1,4 @@
-export default class Song {
+class Song {
     /**
      * 
      * @param {Object} songData 
@@ -88,3 +88,5 @@ export default class Song {
         return (this.originalProgressTime+(new Date()-(this.timing.requestSend)))+50
     }
 }
+
+module.exports = { Song }
