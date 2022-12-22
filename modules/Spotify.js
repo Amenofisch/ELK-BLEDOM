@@ -1,6 +1,6 @@
-import Song from './song'
+const Song = require('./song');
 
-export default class Spotify {
+class Spotify {
     constructor(ledstrip) {
         this.manager = ledstrip
         this.refreshToken = null
@@ -105,3 +105,5 @@ export default class Spotify {
         return res.json()
     }
 }
+
+module.exports = { Spotify };
