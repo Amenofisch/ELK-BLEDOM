@@ -1,11 +1,9 @@
-export default class Duoc {
- 
 const config = require('../config/config.json');
 var shell = require('shelljs');
 
 const Spotify = require('./Spotify');
 const Song = require('./song');
-
+  
 function d2h(d) {
     var s = (+d).toString(16);
     if(s.length < 2) {
@@ -74,8 +72,8 @@ async function setBrightness(value) {
     return true;
 }
 
+class DuocClass {
     constructor() {
-        super()
         this.song = new Song()
         this.duoc = new Duoc(this)
         this.spotify = new Spotify(this)
@@ -112,7 +110,6 @@ async function setBrightness(value) {
             this.emit('update')
         }
     }
-
-module.exports = { setColor, setPower, setBrightness, d2h, setSpotifyRefreshToken };
-
 }
+
+module.exports = { setColor, setPower, setBrightness, d2h };
