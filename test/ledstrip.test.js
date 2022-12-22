@@ -1,4 +1,4 @@
-const ledstrip = require('../modules/ledstrip.js');
+const ledstrip = require('../modules/duoc.js');
 
 test('Decimal to hexadecimal test', () => {
     expect(ledstrip.d2h('100')).toBe('64');
