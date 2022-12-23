@@ -30,10 +30,7 @@ router.get("/", (req, res) => {
 });
 
 
-// Returns all available colors
-router.get('/color', (req, res) => {
-    res.send(colors);
-})
+
 
 // Sets the color of the ledstrip
 router.post("/color", (req, res) => {
