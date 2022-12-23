@@ -28,8 +28,9 @@ router.get("/", (req, res) => {
     res.send("Bluetooth API v3 for ELK-BLEDOM LED Strip Controller").end();
 });
 
-
-
+router.get("/color", (req, res) => {
+    res.send(colors.end());
+});
 
 // Sets the color of the ledstrip
 router.post("/color", (req, res) => {
