@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/color", (req, res) => {
-    res.send(colors.end());
+    res.send(colors).end();
 });
 
 // Sets the color of the ledstrip
