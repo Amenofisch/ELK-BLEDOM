@@ -50,5 +50,9 @@
     {
         "colorname": "orange",
         "colorhex": "#FF1100"
+    },
+    {
+        "colorname": "schwarz",
+        "colorhex": "#000000"
     }
 ]
