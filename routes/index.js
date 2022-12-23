@@ -48,9 +48,11 @@ router.post("/color", (req, res) => {
             ledstrip.setColor(hexColor);
         }
 
-        if (mode == "custom") ledstrip.setColor(color); 
+        if (mode == "custom") ledstrip.setColor(color);
 
-        res.status(200).send("Success!");
+        res.status(200).send({
+            "status": "success",
+        });
     } catch (err) {
         console.log(err);
         res.status(500).send(err);
@@ -66,7 +68,9 @@ router.post("/power", (req, res) => {
         if (value) ledstrip.setPower(true);
         if (!value) ledstrip.setPower(false);
 
-        res.status(200).send("Success!");
+        res.status(200).send({
+            "status": "success",
+        });
     } catch (err) {
         console.log(err);
         res.status(500).send(err);
@@ -80,13 +84,15 @@ router.post("/brightness", (req, res) => {
 
     try {
         let value = req.body.value;
-        
+
         ledstrip.setBrightness(value);
-        res.status(200).send("Success!");
+        res.status(200).send({
+            "status": "success",
+        });
     } catch (err) {
         console.log(err);
         res.status(500).send(err);
     }
 });
 
-module.exports = {router, returnHex};
+module.exports = { router, returnHex };
