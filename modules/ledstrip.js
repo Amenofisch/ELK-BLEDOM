@@ -9,8 +9,11 @@ function d2h(d) {
     return s;
 }
 
-// TODO: Replace gatttool with something more up to date.
-// TODO: fix timezone
+// TODO: Add a function to get the current power state of the ledstrip (kinda hard because of the way the ledstrip works)
+// TODO: Add a function to get the current brightness of the ledstrip (kinda hard because of the way the ledstrip works)
+// TODO: Add a function to get the current color of the ledstrip (kinda hard because of the way the ledstrip works)
+// TODO: Replace gatttool with something more up to date 
+// TODO: fix timezone issue
 
 /** 
 * @deprecated Do not use this function anymore, its broken!

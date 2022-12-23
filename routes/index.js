@@ -23,10 +23,16 @@ router.use((req, res, next) => {
     next();
 });
 
+// Returns a simple message
 router.get("/", (req, res) => {
     res.send("Bluetooth API v3 for ELK-BLEDOM LED Strip Controller").end();
 });
 
+router.get("/color", (req, res) => {
+    res.send(colors).end();
+});
+
+// Sets the color of the ledstrip
 router.post("/color", (req, res) => {
     let color = req.body.color;
     let mode = req.body.mode;
@@ -51,6 +57,7 @@ router.post("/color", (req, res) => {
     }
 });
 
+// Sets the power of the ledstrip
 router.post("/power", (req, res) => {
     if (req.body == null) { res.send("Invalid request! " + req.body).status(400); return; }
 
@@ -66,6 +73,8 @@ router.post("/power", (req, res) => {
     }
 });
 
+
+// Sets the brightness of the ledstrip
 router.post("/brightness", (req, res) => {
     if (req.body == null) { res.send("Invalid request").status(400); return; }
 
