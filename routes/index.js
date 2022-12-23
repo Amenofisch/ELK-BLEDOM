@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const ledstrip = require("../modules/ledstrip.js");
 const colors = require("../config/colors.json");
-const { Router } = require("express");
 
 /**
  * 
