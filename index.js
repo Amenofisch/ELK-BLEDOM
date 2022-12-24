@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const config = require('./config/config.js');
-const ledstrip = require('./modules/duoc.js');
+const ledstrip = require('./modules/ledstrip.js');
 const system = require('./routes/system.js');
 
 const ledrouter = require('./routes/ledstrip.js');
