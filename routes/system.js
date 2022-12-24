@@ -11,6 +11,10 @@ router.use((req, res, next) => {
     next();
 });
 
+router.get('/', (req, res) => {
+    res.send("This is the API endpoint to get all system-related stuff").end();
+});
+
 // Returns a simple message
 router.get("/config", (req, res) => {
     res.send({
