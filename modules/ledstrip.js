@@ -76,4 +76,8 @@ async function setBrightness(value) {
     return true;
 }
 
-module.exports = { setColor, setPower, setBrightness, d2h, brightness };
+async function getBrightness() {
+    return brightness;
+}
+
+module.exports = { setColor, setPower, setBrightness, d2h, getBrightness };
