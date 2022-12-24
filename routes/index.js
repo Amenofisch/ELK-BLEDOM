@@ -78,12 +78,9 @@ router.post("/power", (req, res) => {
 // Returns the brightness of the ledstrip (if correctly synced)
 router.get("/brightness", (req, res) => {
     try {
-        let resp = ledstrip.getBrightness();
-        if(!resp) throw new Error("Error while getting brightness");
-
         res.status(200).send({
             "status": "success",
-            "brightness": resp
+            "brightness": ledstrip.getBrightness()
         });
     } catch (err) {
         console.log(err);
