@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
-const config = require('./config/config.json');
+const config = require('./config/config.js');
 const ledstrip = require('./modules/ledstrip.js');
+const system = require('./routes/system.js');
 
-const ledrouter = require('./routes/index.js');
+const ledrouter = require('./routes/ledstrip.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -17,8 +18,9 @@ app.use(function (req, res, next) {
 
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 app.use('/', ledrouter.router);
+app.use('/system', system.router);
 
-app.listen((config.port), () => {
+app.listen((config.server.port), () => {
     ledstrip.setBrightness(100); // Sets the brightness of the ledstrip to 100%
-    console.log(`ELK-BLEDOM API v3 running on port ${config.port}`)
+    console.log(`ELK-BLEDOM API ${config.server.version} running on port ${config.server.port}`)
 });

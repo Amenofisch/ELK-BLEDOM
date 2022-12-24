@@ -1,4 +1,4 @@
-const config = require('../config/config.json');
+const config = require('../config/config');
 var shell = require('shelljs');
 
 function d2h(d) {
@@ -35,7 +35,7 @@ async function handleResp(resp) {
  * @param {string} hex Takes a hexadecimal input (without #) and tries to set it as the color of the led strip
  */
 async function setColor(hex) {
-    let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e070503${hex}10ef`);
+    let resp = await shell.exec(`gatttool -i ${config.bluetooth.device} -b ${config.bluetooth.bid} --char-write-req -a ${config.bluetooth.handle} -n 7e070503${hex}10ef`);
     if (shell.error()) return false;
     console.log("[" + new Date().toGMTString() + "]" + " Color set to " + hex);
     return true;
@@ -47,9 +47,9 @@ async function setColor(hex) {
  */
 async function setPower(value) {
     if (value) {
-        let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0404f00001ff00ef`);
+        let resp = await shell.exec(`gatttool -i ${config.bluetooth.device} -b ${config.bluetooth.bid} --char-write-req -a ${config.bluetooth.handle} -n 7e0404f00001ff00ef`);
     } else if (!value) {
-        let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0404000000ff00ef`)
+        let resp = await shell.exec(`gatttool -i ${config.bluetooth.device} -b ${config.bluetooth.bid} --char-write-req -a ${config.bluetooth.handle} -n 7e0404000000ff00ef`)
     } else {
         console.error("Wrong request while trying to setPower. Value: " + value.toString());
         return false;
@@ -68,7 +68,7 @@ async function setBrightness(value) {
 
     brightness = value;
     let hex = d2h(value);
-    let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0401${hex}01ffff00ef`);
+    let resp = await shell.exec(`gatttool -i ${config.bluetooth.device} -b ${config.bluetooth.bid} --char-write-req -a ${config.bluetooth.handle} -n 7e0401${hex}01ffff00ef`);
     if (shell.error()) return false;
 
     console.log("[" + new Date().toGMTString() + "]" + " Brightness set to " + value + " HEX: " + hex);
