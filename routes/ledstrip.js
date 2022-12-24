@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const ledstrip = require("../modules/ledstrip.js");
 const colors = require("../config/colors.json");
+const config = require("../config/config.js");
+
 
 /**
  * 
@@ -25,7 +27,7 @@ router.use((req, res, next) => {
 
 // Returns a simple message
 router.get("/", (req, res) => {
-    res.send("Bluetooth API v3 for ELK-BLEDOM LED Strip Controller").end();
+    res.send(`ELK-BLEDOM API ${config.server.version}`).end();
 });
 
 router.get("/color", (req, res) => {
