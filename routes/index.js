@@ -21,11 +21,18 @@ router.use((req, res, next) => {
     next();
 });
 
-router.get('/', (req, res) => {
-    res.send('Bluetooth API v3 for ELK-BLEDOM LED Strip Controller').end();
+
+// Returns a simple message
+router.get("/", (req, res) => {
+    res.send("Bluetooth API v3 for ELK-BLEDOM LED Strip Controller").end();
 });
 
-router.post('/color', (req, res) => {
+router.get("/color", (req, res) => {
+    res.send(colors).end();
+});
+
+// Sets the color of the ledstrip
+router.post("/color", (req, res) => {
     let color = req.body.color;
     let mode = req.body.mode;
 
@@ -35,48 +42,69 @@ router.post('/color', (req, res) => {
     try {
         ledstrip.setPower(true);    // Ensures that the Ledstrip is turned on before trying to change color
 
-        switch(mode) {
-            case 'default':
-                let hexColor = returnHex(color);
-                ledstrip.setColor(hexColor)
-            case 'custom':
-                ledstrip.setColor(color);
-        }
+        if (mode == "default") color = returnHex(color);
+            
+        let resp = ledstrip.setColor(color);
+        if(!resp) throw new Error("Invalid color value or error while setting color");
 
-        res.status(200).send('Success!');
+        res.status(200).send({
+            "status": "success",
+        });
     } catch (err) {
         console.log(err);
         res.status(500).send(err);
     }
 });
 
-router.post('/power', (req, res) => {
-    if (req.body == null) { res.send('Invalid request! ' + req.body).status(400); return; }
+router.post("/power", (req, res) => {
+    if (req.body == null) { res.send("Invalid request! " + req.body).status(400); return; }
+
+    try {
+        let value = req.body.value;
+        let resp = ledstrip.setPower(value);
+        if(!resp) throw new Error("Invalid power value or error while setting power");
+
+        res.status(200).send({
+            "status": "success",
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send(err);
+    }
+});
+
+// Returns the brightness of the ledstrip (if correctly synced)
+router.get("/brightness", (req, res) => {
+    try {
+        res.status(200).send({
+            "status": "success",
+            "brightness": ledstrip.getBrightness().then((value) => { return value; })
+        });
+    } catch (err) {
+        console.log(err);
+        res
+            .status(500)
+            .send(err);
+    }
+});
+
+// Sets the brightness of the ledstrip
+router.post("/brightness", (req, res) => {
+    if (req.body == null) { res.send("Invalid request").status(400); return; }
 
     try {
         let value = req.body.value;
 
-        value ? ledstrip.setPower(true) : ledstrip.setPower(false);
+        let resp = ledstrip.setBrightness(value);
+        if(!resp) throw new Error("Invalid brightness value or error while setting brightness");
 
-        res.status(200).send('Success!');
+        res.status(200).send({
+            "status": "success",
+        });
     } catch (err) {
         console.log(err);
         res.status(500).send(err);
     }
 });
 
-router.post('/brightness', (req, res) => {
-    if (req.body == null) { res.send('Invalid request').status(400); return; }
-
-    try {
-        let value = req.body.value;
-        
-        ledstrip.setBrightness(value);
-        res.status(200).send('Success!');
-    } catch (err) {
-        console.log(err);
-        res.status(500).send(err);
-    }
-});
-
-module.exports = {router, returnHex};
+module.exports = { router, returnHex };

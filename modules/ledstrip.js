@@ -1,6 +1,8 @@
 const config = require('../config/config.json');
 var shell = require('shelljs');
 
+global.brightness = 0;
+
 function d2h(d) {
     var s = (+d).toString(16);
     if(s.length < 2) {
@@ -9,8 +11,9 @@ function d2h(d) {
     return s;
 }
 
-// TODO: Replace gatttool with something more up to date.
-// TODO: fix timezone
+// TODO: Find a proper way to get the power, color and brightness of the ledstrip (hard because you can't just read from the ledstrip's RAM over bluetooth)
+// TODO: Replace gatttool with something more up to date 
+// TODO: fix timezone issue
 
 /** 
 * @deprecated Do not use this function anymore, its broken!
@@ -36,6 +39,7 @@ async function handleResp(resp) {
  */
 async function setColor(hex) {
     let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e070503${hex}10ef`);
+    if (shell.error()) { console.error("Error while trying to setColor. Value: " + hex.toString()); return false; }
     console.log("[" + new Date().toGMTString() + "]" + " Color set to " + hex);
     return true;
 }
@@ -54,6 +58,7 @@ async function setPower(value) {
         console.error("Wrong request while trying to setPower. Value: " + value.toString());
         return false;
     }
+    if (shell.error()) { console.error("Error while trying to setPower. Value: " + value.toString()); return false; }
     console.log("[" + new Date().toGMTString() + "]" + " Ledstrip power status changed to " + value.toString());
     return true;
 }
@@ -65,10 +70,16 @@ async function setPower(value) {
 async function setBrightness(value) {
     if(value < 0 || value > 100) { console.error("Error setting brightness, value must be between 0 and 100"); return false;}
 
+    brightness = value;
     let hex = d2h(value);
     let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0401${hex}01ffff00ef`);
+    if (shell.error()) { console.error("Error while trying to setBrightness. Value: " + value.toString()); return false; }
     console.log("[" + new Date().toGMTString() + "]" + " Brightness set to " + value + " HEX: " + hex);
     return true;
 }
 
-module.exports = { setColor, setPower, setBrightness, d2h };
+async function getBrightness() {
+    return global.brightness;
+}
+
+module.exports = { setColor, setPower, setBrightness, d2h, getBrightness };
