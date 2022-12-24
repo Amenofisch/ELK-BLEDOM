@@ -46,7 +46,7 @@ router.post("/color", (req, res) => {
         if (mode == "default") color = returnHex(color);
             
         let resp = ledstrip.setColor(color);
-        if(!resp) throw err("Invalid color value or error while setting color");
+        if(!resp) throw new Error("Invalid color value or error while setting color");
 
         res.status(200).send({
             "status": "success",
@@ -64,7 +64,7 @@ router.post("/power", (req, res) => {
     try {
         let value = req.body.value;
         let resp = ledstrip.setPower(value);
-        if(!resp) throw err("Invalid power value or error while setting power");
+        if(!resp) throw new Error("Invalid power value or error while setting power");
 
         res.status(200).send({
             "status": "success",
@@ -79,7 +79,7 @@ router.post("/power", (req, res) => {
 router.get("/brightness", (req, res) => {
     try {
         let resp = ledstrip.brightness;
-        if(!resp) throw err("Error while getting brightness");
+        if(!resp) throw new Error("Error while getting brightness");
 
         res.status(200).send({
             "status": "success",
@@ -101,7 +101,7 @@ router.post("/brightness", (req, res) => {
         let value = req.body.value;
 
         let resp = ledstrip.setBrightness(value);
-        if(!resp) throw err("Invalid brightness value or error while setting brightness");
+        if(!resp) throw new Error("Invalid brightness value or error while setting brightness");
 
         res.status(200).send({
             "status": "success",
