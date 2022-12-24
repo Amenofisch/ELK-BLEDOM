@@ -2,6 +2,10 @@
 
 Control your chinese LED Controller with simple POST requests and Bluetooth Low-Energy (BLE)
 
+## Application for your phone
+I recommend checking my other repo where I made a simple application using expo and react-native that you can use on your phone!       
+[ELK-BLEDOM-APP](https://github.com/Amenofisch/ELK-BLEDOM-APP)
+
 ## Turning on LEDs
 Send post request to "http://yourip:5000/power" with the following request body: `{"value": true}`
 ## Turning off LEDS
