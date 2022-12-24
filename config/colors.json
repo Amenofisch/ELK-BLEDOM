@@ -8,16 +8,8 @@
         "colorhex": "#FF0000"
     },
     {
-        "colorname": "dunkelrot",
-        "colorhex": "#880000"
-    },
-    {
         "colorname": "grün",
         "colorhex": "#00FF00"
-    },
-    {
-        "colorname": "dunkelgrün",
-        "colorhex": "#008800"
     },
     {
         "colorname": "blau",
@@ -28,16 +20,8 @@
         "colorhex": "#87CEFA"
     },
     {
-        "colorname": "dunkelblau",
-        "colorhex": "#000088"
-    },
-    {
         "colorname": "pink",
         "colorhex": "#FF00FF"
-    },
-    {
-        "colorname": "dunkelpink",
-        "colorhex": "#880088"
     },
     {
         "colorname": "gelb",
