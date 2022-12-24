@@ -80,7 +80,7 @@ router.get("/brightness", (req, res) => {
     try {
         res.status(200).send({
             "status": "success",
-            "brightness": ledstrip.getBrightness()
+            "brightness": ledstrip.getBrightness().then((value) => { return value; })
         });
     } catch (err) {
         console.log(err);
