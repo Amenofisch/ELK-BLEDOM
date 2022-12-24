@@ -1,7 +1,7 @@
 const config = require('../config/config.json');
 var shell = require('shelljs');
 
-var brightness = 0;
+global.brightness = 0;
 
 function d2h(d) {
     var s = (+d).toString(16);
@@ -77,7 +77,7 @@ async function setBrightness(value) {
 }
 
 async function getBrightness() {
-    return brightness;
+    return global.brightness;
 }
 
 module.exports = { setColor, setPower, setBrightness, d2h, getBrightness };
