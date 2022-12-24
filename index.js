@@ -19,6 +19,6 @@ app.get('/favicon.ico', (req, res) => res.status(204).end());
 app.use('/', ledrouter.router);
 
 app.listen((config.port), () => {
-    ledstrip.setBrightness(100); // Sets the brightness of the ledstrip to 100% so that the server counter is synced with the ledstrip
+    ledstrip.setBrightness(100); // Sets the brightness of the ledstrip to 100%
     console.log(`ELK-BLEDOM API v3 running on port ${config.port}`)
 });

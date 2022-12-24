@@ -1,8 +1,6 @@
 const config = require('../config/config.json');
 var shell = require('shelljs');
 
-global.brightness = 0;
-
 function d2h(d) {
     var s = (+d).toString(16);
     if (s.length < 2) {
@@ -75,10 +73,6 @@ async function setBrightness(value) {
 
     console.log("[" + new Date().toGMTString() + "]" + " Brightness set to " + value + " HEX: " + hex);
     return true;
-}
-
-async function getBrightness() {
-    return global.brightness.toString();
 }
 
 module.exports = { setColor, setPower, setBrightness, d2h, getBrightness };
