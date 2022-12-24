@@ -38,6 +38,7 @@ async function handleResp(resp) {
  */
 async function setColor(hex) {
     let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e070503${hex}10ef`);
+    if (shell.error()) { console.error("Error while trying to setColor. Value: " + hex.toString()); return false; }
     console.log("[" + new Date().toGMTString() + "]" + " Color set to " + hex);
     return true;
 }
@@ -55,6 +56,7 @@ async function setPower(value) {
         console.error("Wrong request while trying to setPower. Value: " + value.toString());
         return false;
     }
+    if (shell.error()) { console.error("Error while trying to setPower. Value: " + value.toString()); return false; }
     console.log("[" + new Date().toGMTString() + "]" + " Ledstrip power status changed to " + value.toString());
     return true;
 }
@@ -68,6 +70,7 @@ async function setBrightness(value) {
 
     let hex = d2h(value);
     let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0401${hex}01ffff00ef`);
+    if (shell.error()) { console.error("Error while trying to setBrightness. Value: " + value.toString()); return false; }
     console.log("[" + new Date().toGMTString() + "]" + " Brightness set to " + value + " HEX: " + hex);
     return true;
 }

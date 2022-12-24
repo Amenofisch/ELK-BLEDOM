@@ -43,12 +43,10 @@ router.post("/color", (req, res) => {
     try {
         ledstrip.setPower(true);    // Ensures that the Ledstrip is turned on before trying to change color
 
-        if (mode == "default") {
-            let hexColor = returnHex(color);
-            ledstrip.setColor(hexColor);
-        }
-
-        if (mode == "custom") ledstrip.setColor(color);
+        if (mode == "default") color = returnHex(color);
+            
+        let resp = ledstrip.setColor(color);
+        if(!resp) throw err("Invalid color value or error while setting color");
 
         res.status(200).send({
             "status": "success",
@@ -65,8 +63,8 @@ router.post("/power", (req, res) => {
 
     try {
         let value = req.body.value;
-        if (value) ledstrip.setPower(true);
-        if (!value) ledstrip.setPower(false);
+        let resp = ledstrip.setPower(value);
+        if(!resp) throw err("Invalid power value or error while setting power");
 
         res.status(200).send({
             "status": "success",
@@ -85,7 +83,9 @@ router.post("/brightness", (req, res) => {
     try {
         let value = req.body.value;
 
-        ledstrip.setBrightness(value);
+        let resp = ledstrip.setBrightness(value);
+        if(!resp) throw err("Invalid brightness value or error while setting brightness");
+        
         res.status(200).send({
             "status": "success",
         });
