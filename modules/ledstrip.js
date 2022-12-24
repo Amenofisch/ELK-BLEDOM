@@ -1,6 +1,8 @@
 const config = require('../config/config.json');
 var shell = require('shelljs');
 
+var brightness = 0;
+
 function d2h(d) {
     var s = (+d).toString(16);
     if(s.length < 2) {
@@ -9,9 +11,7 @@ function d2h(d) {
     return s;
 }
 
-// TODO: Add a function to get the current power state of the ledstrip (kinda hard because of the way the ledstrip works)
-// TODO: Add a function to get the current brightness of the ledstrip (kinda hard because of the way the ledstrip works)
-// TODO: Add a function to get the current color of the ledstrip (kinda hard because of the way the ledstrip works)
+// TODO: Find a proper way to get the power, color and brightness of the ledstrip (hard because you can't just read from the ledstrip's RAM over bluetooth)
 // TODO: Replace gatttool with something more up to date 
 // TODO: fix timezone issue
 
@@ -68,6 +68,7 @@ async function setPower(value) {
 async function setBrightness(value) {
     if(value < 0 || value > 100) { console.error("Error setting brightness, value must be between 0 and 100"); return false;}
 
+    brightness = value;
     let hex = d2h(value);
     let resp = await shell.exec(`gatttool -i ${config.device} -b ${config.bid} --char-write-req -a ${config.handle} -n 7e0401${hex}01ffff00ef`);
     if (shell.error()) { console.error("Error while trying to setBrightness. Value: " + value.toString()); return false; }
