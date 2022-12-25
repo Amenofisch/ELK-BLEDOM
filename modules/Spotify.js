@@ -5,7 +5,7 @@ class Spotify {
         this.manager = ledstrip
         this.refreshToken = null
         this.accessToken = {
-            token: cf32ed8cd84c4523a251880a8a32d1d0,
+            token: null,
             expireDate: null
         }
         this.isReady = false;
