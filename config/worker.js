@@ -92,7 +92,7 @@ async function handleRequest(request) {
                 })
             }
             if(!authCode) {
-                return new Response('woop', {
+                return new Response('error', {
                     status: 401,
                     headers: {
                         'Access-Control-Allow-Origin': '*'
@@ -110,7 +110,7 @@ async function handleRequest(request) {
                 .then(body => {
                     if(body.error) {
                         console.error(body)   
-                        return new Response('wowzers', { 
+                        return new Response('error', { 
                             status: 500,
                             headers: {
                                 'Access-Control-Allow-Origin': '*'
@@ -137,7 +137,7 @@ async function handleRequest(request) {
             break;
         }
     }
-    return new Response('404 Not found', {
+    return new Response('error', {
         status: 404,
         headers: {
             'Access-Control-Allow-Origin': '*'
