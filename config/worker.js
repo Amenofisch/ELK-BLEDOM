@@ -3,8 +3,8 @@ const CLIENT_SECRET = 'REDACTED'
 const REDIRECT_URL = '/spotifycb'
 const WORKER_URL = 'https://duoco.cawman.workers.dev'
 const CALLBACK_URL = 'file://callback'
-const SPOTIFYTOKEN_URL = 'https://accounts.spotify.com/api/token'
-const AUTHSPOTIFY_URL = 'https://accounts.spotify.com/authorize'
+const SPOTIFYTOKEN_URL = './config.js'
+const AUTHSPOTIFY_URL = './config.js'
 
 const refreshtokensMap = new Map()
 
