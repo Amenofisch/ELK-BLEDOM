@@ -9,4 +9,8 @@ module.exports = class config {
         bid: "BE:FF:20:00:06:FF",
         handle: "0x0008",
     };
+    static spotify = {
+        SPOTIFYTOKEN_URL: 'https://accounts.spotify.com/api/token',
+        AUTHSPOTIFY_URL: 'https://accounts.spotify.com/authorize'
+    }
 }
