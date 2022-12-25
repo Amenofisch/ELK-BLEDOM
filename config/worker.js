@@ -1,4 +1,4 @@
-const CLIENT_ID = '6caaf5d0a58e47868553160955e5b8e4'
+const CLIENT_ID = 'cf32ed8cd84c4523a251880a8a32d1d0'
 const CLIENT_SECRET = 'REDACTED'
 const REDIRECT_URL = '/spotifycb'
 const WORKER_URL = 'https://duoco.cawman.workers.dev'
