@@ -14,7 +14,8 @@ class Song {
             this.fullLength = 3*60*1000
             this.originalProgressTime = 0
             this.progressTime = 0;
-            this.imgurl = 'https://cdn.discordapp.com/attachments/389781926661062658/622744129176076288/c3c2e6fb-1e67-4636-ad71-e2c62f785188.png' // some sample pic dw
+            //this.imgurl = 'https://cdn.discordapp.com/attachments/389781926661062658/622744129176076288/c3c2e6fb-1e67-4636-ad71-e2c62f785188.png'
+            this.imgurl = '../c3c2e6fb-1e67-4636-ad71-e2c62f785188.png'
             this.manager = manager;
         } else {
             this.id = songData.id;
