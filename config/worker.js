@@ -3,6 +3,8 @@ const CLIENT_SECRET = 'REDACTED'
 const REDIRECT_URL = '/spotifycb'
 const WORKER_URL = 'https://duoco.cawman.workers.dev'
 const CALLBACK_URL = 'file://callback'
+const SPOTIFYTOKEN_URL = 'https://accounts.spotify.com/api/token'
+const AUTHSPOTIFY_URL = 'https://accounts.spotify.com/authorize'
 
 const refreshtokensMap = new Map()
 
@@ -21,7 +23,7 @@ async function handleRequest(request) {
         case '/spotifylogin': {
             let scopes = 'user-read-currently-playing'
             //let referrer = requestURL.searchParams.get('ref')
-            let url = 'https://accounts.spotify.com/authorize' +
+            let url = AUTHSPOTIFY_URL +
             '?response_type=code' +
             '&client_id=' + CLIENT_ID +
             (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
@@ -45,7 +47,7 @@ async function handleRequest(request) {
                     }
                 })
             }
-            let resp = await fetch('https://accounts.spotify.com/api/token', {
+            let resp = await fetch(SPOTIFYTOKEN_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -99,7 +101,7 @@ async function handleRequest(request) {
                     }
                 })
             } else {
-                let resp = await fetch('https://accounts.spotify.com/api/token', {
+                let resp = await fetch(SPOTIFYTOKEN_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
