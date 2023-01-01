@@ -1,3 +1,5 @@
+# This project is deprecated and replaced by [ELK-BLEDOM-RECODE](https://github.com/Amenofisch/ELK-BLEDOM-RECODE).
+
 # ELK-BLEDOM [![Node.js CI](https://github.com/Amenofisch/ELK-BLEDOM/actions/workflows/node.js.yml/badge.svg)](https://github.com/Amenofisch/ELK-BLEDOM/actions/workflows/node.js.yml)
 
 Control your chinese LED Controller with simple POST requests and Bluetooth Low-Energy (BLE)
