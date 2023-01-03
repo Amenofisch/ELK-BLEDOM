@@ -1,6 +1,9 @@
 const config = require('../config/config');
 var shell = require('shelljs');
 
+const Spotify = require('./Spotify');
+const Song = require('./song');
+
 function d2h(d) {
     var s = (+d).toString(16);
     if (s.length < 2) {
@@ -73,6 +76,46 @@ async function setBrightness(value) {
 
     console.log("[" + new Date().toGMTString() + "]" + " Brightness set to " + value + " HEX: " + hex);
     return true;
+}
+
+  class DuocClass {
+    constructor() {
+        this.song = new Song()
+        this.duoc = new Duoc(this)
+        this.spotify = new Spotify(this)
+        this.isPaused = true
+        this.brightness = 100
+    }
+
+    start() {
+        this.isPaused = false
+        setPower = true
+    }
+
+    stop() {
+        this.isPaused = true
+        setPower = false
+    }
+
+    setSpotifyRefreshToken(token) {
+        if(token == null) {
+            this.spotify.stopPolling()
+            this.spotify.refreshToken = null
+            this.spotify.accessToken = {
+                token: null,
+                expiry: null
+            }
+            this.spotify.isReady = false;
+            this.stop()
+            this.emit('update')
+        } else {
+            this.spotify.refreshToken = token
+            this.spotify.getAccessToken()
+            this.spotify.isReady = true;
+            this.spotify.startPolling()
+            this.emit('update')
+        }
+    }
 }
 
 module.exports = { setColor, setPower, setBrightness, d2h};
